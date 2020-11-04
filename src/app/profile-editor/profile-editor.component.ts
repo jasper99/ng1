@@ -1,52 +1,102 @@
 import { FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-profile-editor',
   templateUrl: './profile-editor.component.html',
   styleUrls: ['./profile-editor.component.css']
 })
-export class ProfileEditorComponent {
+// export class ProfileEditorComponent implements OnInit, AfterViewInit {
 
-  profileForm = this.formBuilder.group({
+//   profileForm = this.formBuilder.group({
+//     firstName: ['', Validators.required],
+//     lastName: [''],
+//     address: this.formBuilder.group({
+//         street: [],
+//         city: [],
+//         status:[],
+//         zip:['']
+//     }),
+//     aliases: this.formBuilder.array([
+//       this.formBuilder.control('')
+//     ])
+
+//   });
+
+//   // get aliases() {
+//   //   return this.profileForm.get('aliases') as FormArray;
+//   // }
+
+//   get aliases() {
+//     return this.profileForm.get('aliases') as FormArray;
+//   }
+
+//   constructor(private formBuilder: FormBuilder) {
+
+//   }
+
+//   ngOnInit(): void {
+//   }
+
+//   ngAfterViewInit(): void{
+//    // this.profileForm.setValue({ firstName: 'TEST', lastName: 'ASC' })
+//   }
+
+//   updateForm() {
+//     this.profileForm.setValue({
+//       firstName: 'Nancy',
+//       address: {
+//         street: '123'
+//       }
+//     })
+//   }
+
+//   addAlias() {
+//     this.aliases.push(this.formBuilder.control(''));
+//   }
+
+
+//   onSubmit() {
+//     console.warn(this.profileForm.value)
+//   }
+// }
+export class ProfileEditorComponent {
+  profileForm = this.fb.group({
     firstName: ['', Validators.required],
     lastName: [''],
-    address: this.formBuilder.group({
-        street: [],
-        city: [],
-        status:[],
-        zip:['']
+    address: this.fb.group({
+      street: [''],
+      city: [''],
+      state: [''],
+      zip: ['']
     }),
-    aliases: this.formBuilder.array([
-      this.formBuilder.control('')
+    aliases: this.fb.array([
+      this.fb.control('')
     ])
-
   });
 
   get aliases() {
     return this.profileForm.get('aliases') as FormArray;
   }
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private fb: FormBuilder) { }
 
-    // this.profileForm.get('first').valueChanges.subscribe(x=> console.log)
-  }
 
-  updateForm() {
-    this.profileForm.setValue({
+  updateProfile() {
+    this.profileForm.patchValue({
       firstName: 'Nancy',
       address: {
-        street: '123'
+        street: '123 Drew Street'
       }
-    })
+    });
   }
 
   addAlias() {
-    this.aliases.push(new FormControl(''));
+    this.aliases.push(this.fb.control(''));
   }
 
-
   onSubmit() {
-    console.warn(this.profileForm.value)
+    // TODO: Use EventEmitter with form value
+    console.warn(this.profileForm.value);
   }
 }
