@@ -1,12 +1,12 @@
 import { FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-profile-editor',
   templateUrl: './profile-editor.component.html',
   styleUrls: ['./profile-editor.component.css']
 })
-export class ProfileEditorComponent {
+export class ProfileEditorComponent implements OnInit {
 
   profileForm = this.formBuilder.group({
     firstName: ['', Validators.required],
@@ -30,6 +30,9 @@ export class ProfileEditorComponent {
   constructor(private formBuilder: FormBuilder) {
 
     // this.profileForm.get('first').valueChanges.subscribe(x=> console.log)
+  }
+
+  ngOnInit(): void {
   }
 
   updateForm() {
