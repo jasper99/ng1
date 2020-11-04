@@ -1,4 +1,4 @@
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit(form)" #form="ngForm">
   <label>
     First Name:
     <input type="text" formControlName="firstName">
@@ -21,7 +21,7 @@
     </label>
     <label>
       Status:
-      <input type="text" formControlName="state">
+      <input type="text" formControlName="status">
     </label>
     <label>
       Zip:
@@ -29,14 +29,14 @@
     </label>
   </div>
 
-  <div formArrayName="aliases">
+  <div>
     <h3>Aliases</h3>
     <button type="button" (click)="addAlias()">Add Alias</button>
-    <div *ngFor="let alias of aliases.controls; let i=index">
+    <div *ngFor="let alias of aliases.controls; let i = index">
       <!-- The repeated alias template -->
       <label>
-        Alias:
-        <input type="text" [formControlName]="i">
+        Alias2:
+        <input type="text" formControlName="{{ i }}">
       </label>
     </div>
   </div>
@@ -58,4 +58,3 @@
 <p>
   <button type="button" (click)="updateForm()">UpdateForm</button>
 </p>
-
